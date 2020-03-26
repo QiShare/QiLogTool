@@ -79,7 +79,8 @@ static CrashHandler *instance = nil;
 
 - (void)handleException:(NSException *)exception {
     
-    NSString *message = [NSString stringWithFormat:@"崩溃原因如下:\n%@\n%@",
+    NSString *message = [NSString stringWithFormat:@"\n崩溃时间：%@\n 崩溃原因如下:\n%@\n%@\n",
+                         [[NSDate date] dateByAddingTimeInterval:8.0 * 60 * 60],
                          [exception reason],
                          [[exception userInfo] objectForKey:kCaughtExceptionStackInfoKey]];
     NSLog(@"%@",message);

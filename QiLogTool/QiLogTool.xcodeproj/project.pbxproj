@@ -70,6 +70,7 @@
 		2121CFB72428EFDB006D43DD /* QiLogTool */ = {
 			isa = PBXGroup;
 			children = (
+				EE5A5238242C64A200F9E0B5 /* QiLogTool */,
 				2121CFE7242B0C79006D43DD /* CrashHandler */,
 				2121CFD4242AF8D0006D43DD /* AirSandbox */,
 				2121CFB82428EFDB006D43DD /* AppDelegate.h */,
@@ -78,8 +79,6 @@
 				2121CFBC2428EFDB006D43DD /* SceneDelegate.m */,
 				2121CFBE2428EFDB006D43DD /* ViewController.h */,
 				2121CFBF2428EFDB006D43DD /* ViewController.m */,
-				2121CFD1242A4B19006D43DD /* QiLogTool.h */,
-				2121CFD2242A4B19006D43DD /* QiLogTool.m */,
 				2121CFC12428EFDB006D43DD /* Main.storyboard */,
 				2121CFC42428EFDC006D43DD /* Assets.xcassets */,
 				2121CFC62428EFDC006D43DD /* LaunchScreen.storyboard */,
@@ -105,6 +104,15 @@
 				2121CFE9242B0C84006D43DD /* CrashHandler.m */,
 			);
 			path = CrashHandler;
+			sourceTree = "<group>";
+		};
+		EE5A5238242C64A200F9E0B5 /* QiLogTool */ = {
+			isa = PBXGroup;
+			children = (
+				2121CFD1242A4B19006D43DD /* QiLogTool.h */,
+				2121CFD2242A4B19006D43DD /* QiLogTool.m */,
+			);
+			path = QiLogTool;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

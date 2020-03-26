@@ -8,22 +8,10 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "PAirSandbox.h"
-
 #include <execinfo.h>
-//#import "SignalHandler.h"
-//#import "UncaughtExceptionHandler.h"
-
-//#import "AppCatchExceptionHandler.h"
-
-//#include <libkern/OSAtomic.h>
-
+#import "PAirSandbox.h"
 #import "CrashHandler.h"
 #import "QiLogTool.h"
-
-//记录之前的异常处理器
-// static NSUncaughtExceptionHandler *previousUncaughtExceptionHandler = nil;
-
 
 @implementation AppDelegate
 
@@ -45,15 +33,19 @@
         });
     #endif
     
-    // 重定向NSLog内容 注意：把NSLog的内容重定向到其他文件
+    // 重定向NSLog内容 注意：把NSLog的内容重定向到其他文件后 控制台就不会再输出内容
     [QiLogTool redirectNSLog];
     
     #ifdef DEBUG
-        // 捕获异常 Summary Changes the top-level error handler.
-        // NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
+        // 捕获异常 Changes the top-level error handler.
+         NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
     #endif
-    // 捕获异常并且有一次应用遇到异常后 不会闪退的处理
-    [CrashHandler sharedInstance];
+    
+    // #ifdef DEBUG
+    #ifdef RELEASE
+        // 捕获异常并且有一次应用遇到异常后 不会闪退的处理
+        [CrashHandler sharedInstance];
+    #endif
     return YES;
 }
 
@@ -67,7 +59,9 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSString *crashDetail = [NSString stringWithFormat:@"========异常错误报告========\n name:%@\n reason:\n%@\n callStackSymbols:\n%@", name, reason, [callStack componentsJoinedByString:@"\n"]];
     NSLog(@"%@", crashDetail);
     [QiLogTool logFile:@"crash.log" content:crashDetail];
+    // 记录日志后 可以选择合适的时机把日志上传到服务端 上传成功后 把相应的日志删除即可
 
+    /*
     // 把异常崩溃信息发送至开发者邮件
     NSMutableString *mailUrl = [NSMutableString string];
     [mailUrl appendString:@"mailto:QiShareTestCrash@qq.com"];
@@ -77,6 +71,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSString *mailPath = [mailUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     // mailPath = [mailUrl stringByAddingPercentEncodingWithAllowedCharacters: [NSCharacterSet URLHostAllowedCharacterSet]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mailPath]];
+     */
 }
 
 
